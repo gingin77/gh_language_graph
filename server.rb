@@ -3,12 +3,6 @@ require 'octokit'
 
 module Example
   class MyGraphApp < Sinatra::Base
-    # !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
-    # Instead, set and test environment variables, like below
-    # if ENV['GITHUB_CLIENT_ID'] && ENV['GITHUB_CLIENT_SECRET']
-    #  CLIENT_ID        = ENV['GITHUB_CLIENT_ID']
-    #  CLIENT_SECRET    = ENV['GITHUB_CLIENT_SECRET']
-    # end
 
     CLIENT_ID = ENV["GH_GRAPH_CLIENT_ID"]
     CLIENT_SECRET = ENV["GH_GRAPH_SECRET_ID"]
@@ -33,7 +27,6 @@ module Example
         repos = octokit_client.repositories
         language_obj = {}
         repos.each do |repo|
-          # sometimes language can be nil
           if repo.language
             if !language_obj[repo.language]
               language_obj[repo.language] = 1
@@ -77,10 +70,6 @@ module Example
 	         hash[:count] < 50 || hash[:count] > 10000
          end
 
-        puts language_byte_count
-        puts language_byte_count.class
-
-        # some mandatory formatting for d3
         language_bytes = [ :name => "language_bytes", :elements => language_byte_count]
 
         erb :lang_freq, :locals => { :languages => languages.to_json, :language_byte_count => language_bytes.to_json}

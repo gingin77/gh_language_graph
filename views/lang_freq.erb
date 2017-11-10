@@ -8,40 +8,74 @@
     </style>
 
     <style>
-    svg {
-      padding: 20px;
-    }
-    rect {
-      fill: #060026;
-    }
-    text {
-      fill: white;
-      font-family: 'Josefin Sans', sans-serif;
-    }
-    text.yAxis {
-      font-size: 12px;
-      font-family: 'Josefin Sans', sans-serif;
-      fill: black;
-    }
-    .cell {
-      position: absolute;
-    }
+      body{
+        max-width: 800px;
+      }
+      section{
+        margin: 20px;
+        padding: 20px;
+        font-family: 'Josefin Sans', sans-serif;
+      }
+      #wrapper{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+      }
+      #graphicOne, #graphicTwo{
+        display: flex;
+        flex-direction: column;
+        max-height: 600px;
+        text-align: center;
+      }
+      #graphicTwo{
+        margin-left: 80px;
+      }
+      #byte_freq{
+        padding: 0 19px 0 0;
+        margin-left: -12px;
+      }
+      svg {
+        padding: 20px;
+      }
+      rect {
+        fill: #060026;
+      }
+      text {
+        fill: white;
+        font-family: 'Josefin Sans', sans-serif;
+      }
+      text.yAxis {
+        font-size: 14px;
+        font-family: 'Josefin Sans', sans-serif;
+        fill: #060026;
+      }
+
+      .cell {
+        position: absolute;
+      }
     </style>
   </head>
   <body>
     <section style="font-family: 'Josefin Sans', sans-serif;">
-      <p>Check this sweet data out:</p>
-      <div id="lang_freq"></div>
-      <p>Or, if you prefer:</p>
-      <div id="byte_freq"></div>
+      <div id="wrapper">
+        <div id="graphicOne">
+          <h3>Primary Languages by Repo Number</h3>
+          <div id="lang_freq"></div>
+        </div>
+        <div id="graphicTwo">
+          <h3>TreeMap indicating byte number for each language, across all GitHub repos</h3>
+          <div id="byte_freq"></div>
+        </div>
+      </div>
     </section>
 
     <script>
       var data = <%= languages %>;
 
-      var barWidth = 40;
-      var width = (barWidth + 10) * data.length;
-      var height = 300;
+      var barWidth = 50;
+      var width = (barWidth + 12) * data.length;
+      var height = 380;
 
       var x = d3.scale.linear().domain([0, data.length]).range([0, width]);
       var y = d3.scale.linear().domain([0, d3.max(data, function(datum) { return datum.count; })]).
@@ -151,7 +185,7 @@
 
       let jsBox = readCellDivs(jsName)
       jsBoxCurrentStyle = jsBox.getAttribute('style')
-      jsBox.setAttribute('style', jsBoxCurrentStyle + "margin-top: 20px")
+      jsBox.setAttribute('style', jsBoxCurrentStyle + "margin-top: 19px")
 
     </script>
   </body>
