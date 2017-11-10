@@ -6,6 +6,7 @@
     <style>
     @import url('https://fonts.googleapis.com/css?family=Josefin+Sans');
     </style>
+
     <style>
     svg {
       padding: 20px;
@@ -22,7 +23,7 @@
       font-family: 'Josefin Sans', sans-serif;
       fill: black;
     }
-    #cell {
+    .cell {
       position: absolute;
     }
     </style>
@@ -115,19 +116,12 @@
               .data(function(d){return treemap.nodes(d);})
               .enter()
               .append("div")
-              .attr("id","cell")
+              .attr("class","cell")
               .style("margin","10px")
               .style("padding","10px")
               .style("background",function(d){ return colorScale(colorFunction(d));})
               .call(cell)
-              let parent = document.getElementById("cell")
-              console.log(parent)
-              let newEl = document.createElement("span")
-              console.log(newEl)
-              newEl.text(nameFunction)
-              newEl.style("padding-top","10px")
-              parent.appendChild(newEl)
-
+              .text(nameFunction);
       }
 
       function cell(){
@@ -137,6 +131,28 @@
               .style("width",function(d){return d.dx - 1 + "px";})
               .style("height",function(d){return d.dy - 1 + "px";});
       }
+
+      let htmlName = language_bytes[0].elements[5].name
+      let jsName = language_bytes[0].elements[4].name
+      console.log(jsName)
+
+      let cellDivs = document.getElementsByClassName('cell')
+
+      function readCellDivs (textEl) {
+        for (i = 0; i < cellDivs.length; i++){
+              if (cellDivs[i].innerText === textEl){
+                  return cellDivs[i]
+              }
+          }
+      }
+      let htmlBox = readCellDivs(htmlName)
+      htmlBoxCurrentStyle = htmlBox.getAttribute('style')
+      htmlBox.setAttribute('style', htmlBoxCurrentStyle + "padding-bottom: 0px")
+
+      let jsBox = readCellDivs(jsName)
+      jsBoxCurrentStyle = jsBox.getAttribute('style')
+      jsBox.setAttribute('style', jsBoxCurrentStyle + "margin-top: 20px")
+
     </script>
   </body>
 </html>
