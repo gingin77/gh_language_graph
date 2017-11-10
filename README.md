@@ -1,12 +1,12 @@
 ## gh_language_graph
 
-#Functional and stylistic modifications made to GitHub's Developer's Guide, Rendering Data as Graphs
+# Functional and stylistic modifications made to GitHub's Developer's Guide, Rendering Data as Graphs
 
 Bulk of code came from: @https://developer.github.com/v3/guides/rendering-data-as-graphs/
 
-##Modifications made in the server.rb file and in the view.
+## Modifications made in the server.rb file and in the view.
 
-###In server.rb:
+### In server.rb:
   Restrict display of Coffee Script (#of bytes was around 800) with the following funciton:
 
   ```
@@ -15,7 +15,7 @@ Bulk of code came from: @https://developer.github.com/v3/guides/rendering-data-a
    end
    ```
 
-###In lang_freq.erb:
+### In lang_freq.erb:
   Alter styles and html to make both graphics display side-by-side
   Change color scheme
 
@@ -30,6 +30,7 @@ Bulk of code came from: @https://developer.github.com/v3/guides/rendering-data-a
   In second script (rendering the Treemap):
     - Modify size of the Treemap, down to 400 x 400
       - In original:
+
         ```
         drawTreemap(5000, 2000, ...
 
@@ -38,6 +39,7 @@ Bulk of code came from: @https://developer.github.com/v3/guides/rendering-data-a
     - The text labels exist as innerText for each div with class="cell". They were crammed against box edge and not easily readable, so I experimented with adding padding and margins to each 'cell' div.
 
     - This created a more interesting visual, but the JavaScript label was getting covered up. To remedy this, I used the **following set of JS** to modify the padding and margin on the HTML and JS boxes, respectively.
+
 
     ```
         let htmlName = language_bytes[0].elements[5].name
