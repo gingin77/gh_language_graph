@@ -22,7 +22,7 @@
       font-family: 'Josefin Sans', sans-serif;
       fill: black;
     }
-    .cell {
+    #cell {
       position: absolute;
     }
     </style>
@@ -115,15 +115,18 @@
               .data(function(d){return treemap.nodes(d);})
               .enter()
               .append("div")
-              .attr("class","cell")
+              .attr("id","cell")
               .style("margin","10px")
               .style("padding","10px")
               .style("background",function(d){ return colorScale(colorFunction(d));})
               .call(cell)
-              .text(nameFunction);
-              // .append("p")
-              // p.innertext(nameFunction);
-              // p.style("padding-top","10px")
+              let parent = document.getElementById("cell")
+              console.log(parent)
+              let newEl = document.createElement("span")
+              console.log(newEl)
+              newEl.text(nameFunction)
+              newEl.style("padding-top","10px")
+              parent.appendChild(newEl)
 
       }
 
