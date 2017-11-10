@@ -28,13 +28,12 @@ Bulk of code came from: @https://developer.github.com/v3/guides/rendering-data-a
   ```
 
   In second script (rendering the Treemap):
-    - Modify size of the Treemap, down to 400 x 400
-      - In original:
+    Modify size of the Treemap, down to 400 x 400. In original, see:
 
-        ```
-        drawTreemap(5000, 2000, ...
+    ```
+    drawTreemap(5000, 2000, ...
 
-        ```
+    ```
 
     - The text labels exist as innerText for each div with class="cell". They were crammed against box edge and not easily readable, so I experimented with adding padding and margins to each 'cell' div.
 
