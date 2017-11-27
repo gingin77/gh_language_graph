@@ -60,11 +60,11 @@
     <section style="font-family: 'Josefin Sans', sans-serif;">
       <div id="wrapper">
         <div id="graphicOne">
-          <h3>Primary Languages by Repo Number</h3>
+          <h3>Primary Languages for All Project Repositories on GitHub</h3>
           <div id="lang_freq"></div>
         </div>
         <div id="graphicTwo">
-          <h3>TreeMap indicating byte number for each language, across all GitHub repos</h3>
+          <h3>TreeMap indicating byte number for each progamming language, across all GitHub project repositories</h3>
           <div id="byte_freq"></div>
         </div>
       </div>
@@ -72,6 +72,7 @@
 
     <script>
       var data = <%= languages %>;
+      console.log(data)
 
       var barWidth = 50;
       var width = (barWidth + 12) * data.length;
@@ -120,6 +121,7 @@
     </script>
     <script>
       var language_bytes = <%= language_byte_count %>
+      console.log(language_bytes)
 
       var childrenFunction = function(d){return d.elements};
       var sizeFunction = function(d){return d.count;};
@@ -137,7 +139,8 @@
           var treemap = d3.layout.treemap()
               .children(childrenFunction)
               .size([width,height])
-              .value(sizeFunction);
+              .value(sizeFunction)
+              .padding([1, 0, 1, 0]);
 
           var div = d3.select(elementSelector)
               .append("div")
@@ -147,14 +150,20 @@
               .style("color","#F6F5F6");
 
           div.data(language_bytes).selectAll("div")
-              .data(function(d){return treemap.nodes(d);})
+              .data(function(d){
+                return treemap.nodes(d)
+              })
               .enter()
               .append("div")
               .attr("class","cell")
-              .style("margin","10px")
-              .style("padding","10px")
-              .style("background",function(d){ return colorScale(colorFunction(d));})
+              .style("margin-top","4px")
+              .style("padding-top","10px")
+              .style("background",function(d){
+                return colorScale(colorFunction(d))
+              })
               .call(cell)
+              .attr("dy", "-1em")
+              .attr("dx", "-1em")
               .text(nameFunction);
       }
 
@@ -166,26 +175,26 @@
               .style("height",function(d){return d.dy - 1 + "px";});
       }
 
-      let htmlName = language_bytes[0].elements[5].name
-      let jsName = language_bytes[0].elements[4].name
-      console.log(jsName)
-
-      let cellDivs = document.getElementsByClassName('cell')
-
-      function readCellDivs (textEl) {
-        for (i = 0; i < cellDivs.length; i++){
-              if (cellDivs[i].innerText === textEl){
-                  return cellDivs[i]
-              }
-          }
-      }
-      let htmlBox = readCellDivs(htmlName)
-      htmlBoxCurrentStyle = htmlBox.getAttribute('style')
-      htmlBox.setAttribute('style', htmlBoxCurrentStyle + "padding-bottom: 0px")
-
-      let jsBox = readCellDivs(jsName)
-      jsBoxCurrentStyle = jsBox.getAttribute('style')
-      jsBox.setAttribute('style', jsBoxCurrentStyle + "margin-top: 19px")
+      // let htmlName = language_bytes[0].elements[5].name
+      // let jsName = language_bytes[0].elements[4].name
+      // console.log(jsName)
+      //
+      // let cellDivs = document.getElementsByClassName('cell')
+      //
+      // function readCellDivs (textEl) {
+      //   for (i = 0; i < cellDivs.length; i++){
+      //         if (cellDivs[i].innerText === textEl){
+      //             return cellDivs[i]
+      //         }
+      //     }
+      // }
+      // let htmlBox = readCellDivs(htmlName)
+      // htmlBoxCurrentStyle = htmlBox.getAttribute('style')
+      // htmlBox.setAttribute('style', htmlBoxCurrentStyle + "padding-bottom: 0px")
+      //
+      // let jsBox = readCellDivs(jsName)
+      // jsBoxCurrentStyle = jsBox.getAttribute('style')
+      // jsBox.setAttribute('style', jsBoxCurrentStyle + "margin-top: 19px")
 
     </script>
   </body>

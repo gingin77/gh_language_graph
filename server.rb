@@ -7,7 +7,6 @@ module Example
     CLIENT_ID = ENV["GH_GRAPH_CLIENT_ID"]
     CLIENT_SECRET = ENV["GH_GRAPH_SECRET_ID"]
 
-
     enable :sessions
 
     set :github_options, {
@@ -71,6 +70,7 @@ module Example
          end
 
         language_bytes = [ :name => "language_bytes", :elements => language_byte_count]
+        puts language_bytes
 
         erb :lang_freq, :locals => { :languages => languages.to_json, :language_byte_count => language_bytes.to_json}
       end

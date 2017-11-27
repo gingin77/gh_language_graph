@@ -1,8 +1,14 @@
 ## gh_language_graph
 
+To start server, use
+
+  ```
+  bundle exec rackup -p4567
+  ```
+
 # Functional and stylistic modifications made to GitHub's Developer's Guide, Rendering Data as Graphs
 
-Bulk of code came from: @https://developer.github.com/v3/guides/rendering-data-as-graphs/
+Bulk of code came from: https://developer.github.com/v3/guides/rendering-data-as-graphs/
 
 ## Modifications made in the server.rb file and in the view.
 
