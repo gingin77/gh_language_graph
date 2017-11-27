@@ -31,10 +31,6 @@
       #graphicTwo{
         margin-left: 80px;
       }
-      #byte_freq{
-        padding: 0 19px 0 0;
-        margin-left: -12px;
-      }
       svg {
         padding: 20px;
       }
@@ -53,6 +49,11 @@
 
       .cell {
         position: absolute;
+      }
+
+      .label{
+        position: relative;
+        top: 20px;
       }
     </style>
   </head>
@@ -82,7 +83,6 @@
       var y = d3.scale.linear().domain([0, d3.max(data, function(datum) { return datum.count; })]).
         rangeRound([0, height]);
 
-      // add the canvas to the DOM
       var languageBars = d3.select("#lang_freq").
         append("svg:svg").
         attr("width", width).
@@ -140,7 +140,6 @@
               .children(childrenFunction)
               .size([width,height])
               .value(sizeFunction)
-              .padding([1, 0, 1, 0]);
 
           var div = d3.select(elementSelector)
               .append("div")
@@ -156,14 +155,12 @@
               .enter()
               .append("div")
               .attr("class","cell")
-              .style("margin-top","4px")
-              .style("padding-top","10px")
               .style("background",function(d){
                 return colorScale(colorFunction(d))
               })
               .call(cell)
-              .attr("dy", "-1em")
-              .attr("dx", "-1em")
+            .append('text')
+              .attr('class', 'label')
               .text(nameFunction);
       }
 
@@ -174,28 +171,6 @@
               .style("width",function(d){return d.dx - 1 + "px";})
               .style("height",function(d){return d.dy - 1 + "px";});
       }
-
-      // let htmlName = language_bytes[0].elements[5].name
-      // let jsName = language_bytes[0].elements[4].name
-      // console.log(jsName)
-      //
-      // let cellDivs = document.getElementsByClassName('cell')
-      //
-      // function readCellDivs (textEl) {
-      //   for (i = 0; i < cellDivs.length; i++){
-      //         if (cellDivs[i].innerText === textEl){
-      //             return cellDivs[i]
-      //         }
-      //     }
-      // }
-      // let htmlBox = readCellDivs(htmlName)
-      // htmlBoxCurrentStyle = htmlBox.getAttribute('style')
-      // htmlBox.setAttribute('style', htmlBoxCurrentStyle + "padding-bottom: 0px")
-      //
-      // let jsBox = readCellDivs(jsName)
-      // jsBoxCurrentStyle = jsBox.getAttribute('style')
-      // jsBox.setAttribute('style', jsBoxCurrentStyle + "margin-top: 19px")
-
     </script>
   </body>
 </html>
